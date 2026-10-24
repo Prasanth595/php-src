@@ -100,6 +100,8 @@ PHP                                                                        NEWS
     with chained Pi nodes). (ndossche)
   . Fixed JIT treating an array as packed after a string key write turned it
     into a hash. (jorgsowa)
+  . Fixed bug GH-24622 (Tracing JIT skips spilling inherited register values
+    before property helpers). (ndossche, Alessio Attilio)
 
 - PDO:
   . Fixed invalid ATTR_ORACLE_NULLS values being accepted and truncated.
