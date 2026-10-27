@@ -3058,7 +3058,7 @@ PHP_FUNCTION(curl_escape)
 
 	ch = Z_CURL_P(zid);
 
-	if (ZEND_SIZE_T_INT_OVFL(ZSTR_LEN(str))) {
+	if (!ZEND_IN_RANGE_OF(ZSTR_LEN(str), int)) {
 		RETURN_FALSE;
 	}
 
@@ -3087,7 +3087,7 @@ PHP_FUNCTION(curl_unescape)
 
 	ch = Z_CURL_P(zid);
 
-	if (ZEND_SIZE_T_INT_OVFL(ZSTR_LEN(str))) {
+	if (!ZEND_IN_RANGE_OF(ZSTR_LEN(str), int)) {
 		RETURN_FALSE;
 	}
 
