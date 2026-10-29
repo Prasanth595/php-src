@@ -48,7 +48,8 @@ function get_current_version(): array {
 }
 
 function select_jobs($repository, $trigger, $nightly, $labels, $php_version, $ref, $all_variations) {
-    $no_jobs = in_array('CI: No jobs', $labels, true);
+    $test_sapi_builds = in_array('CI: SAPI builds', $labels, true);
+    $no_jobs = in_array('CI: No jobs', $labels, true) || $test_sapi_builds;
     $all_jobs = in_array('CI: All jobs', $labels, true) || $nightly;
     $test_alpine = in_array('CI: Alpine', $labels, true);
     $test_benchmarking = in_array('CI: Benchmarking', $labels, true);
@@ -160,6 +161,11 @@ function select_jobs($repository, $trigger, $nightly, $labels, $php_version, $re
             ? ['zts' => [true, false]]
             : ['zts' => [false]];
     }
+    if ($all_jobs || $test_sapi_builds) {
+        $jobs['APACHE_SAPI'] = true;
+        $jobs['LITESPEED_SAPI'] = true;
+    }
+
     return $jobs;
 }
 
